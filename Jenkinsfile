@@ -1,22 +1,34 @@
 pipeline {
+    agent any
 
-		agent {
-				label {
-							label "built-in"
-				}
-		}
-		
-		
-		stages {
-		
-					stage ("one") {
-					
-					
-							steps {
-							
-										echo "hello master"
-										sleep 1
-							}
-					}
-		}
+    stages {
+
+        stage('Build') {
+            steps {
+                echo "Building the application"
+                sh './mvnw clean compile'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                echo "Running tests"
+                sh './mvnw test'
+            }
+        }
+
+        stage('Package') {
+            steps {
+                echo "Packaging application"
+                sh './mvnw package'
+            }
+        }
+
+        stage('Archive Artifact') {
+            steps {
+                archiveArtifacts artifacts: 'target/*.jar'
+            }
+        }
+
+    }
 }
