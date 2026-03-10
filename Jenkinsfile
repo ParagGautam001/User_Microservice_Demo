@@ -5,10 +5,10 @@ pipeline {
 
         stage('Build') {
             steps {
+                echo "Building application"
                 sh 'chmod +x mvnw'
                 sh './mvnw -B -q clean compile'
             }
-        }
         }
 
         stage('Test') {
