@@ -6,6 +6,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo "Building application"
+                sh 'chmod +x mvnw'
                 sh './mvnw clean compile'
             }
         }
