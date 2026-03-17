@@ -1,21 +1,43 @@
 pipeline {
     agent any
 
+    environment {
+        DOCKER_IMAGE = "paraggautam1/user-service:1.0"
+    }
+
     stages {
 
-        stage('Build') {
+        stage('Clone Code') {
             steps {
-                echo "Building application"
-                sh 'chmod +x mvnw'
-                sh './mvnw -B -q -DskipTests clean package'
+                git 'https://github.com/ParagGautam001/User_Microservice_Demo.git'
             }
         }
 
-        stage('Archive Artifact') {
+        stage('Build JAR') {
             steps {
-                archiveArtifacts artifacts: 'target/*.jar'
+                sh 'mvn clean package -DskipTests'
             }
         }
 
+        stage('Build Docker Image') {
+            steps {
+                sh 'docker build -t $DOCKER_IMAGE .'
+            }
+        }
+
+        stage('Push to DockerHub') {
+            steps {
+                withCredentials([usernamePassword(
+                    credentialsId: 'dockerhub-creds',
+                    usernameVariable: 'USERNAME',
+                    passwordVariable: 'PASSWORD'
+                )]) {
+                    sh '''
+                    echo $PASSWORD | docker login -u $USERNAME --password-stdin
+                    docker push $DOCKER_IMAGE
+                    '''
+                }
+            }
+        }
     }
 }
