@@ -1,6 +1,11 @@
 pipeline {
     agent any
 
+    tools {
+        maven 'Maven'
+        jdk 'JDK17'
+    }
+
     environment {
         DOCKER_IMAGE = "paraggautam1/user-service:1.0"
     }
