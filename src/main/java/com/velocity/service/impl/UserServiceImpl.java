@@ -22,28 +22,4 @@ public class UserServiceImpl implements UserService {
         return "User Service Running 🚀";
 }
 
-	@Override
-	public ResponseDto getUser(int id) {
-		// create object of responseDto
-		ResponseDto responseDto = new ResponseDto();
-		// get the user id
-		User user = userRepository.findById(id);
-		UserDto userDto = mapToUsers(user);
-		PolicyDto policyDto = webClient.get().uri("http://localhost:8283/getPolicy/" + user.getId()).retrieve()
-				.bodyToMono(PolicyDto.class).block();
-		// set into responseto object
-		responseDto.setUser(userDto);
-		responseDto.setPolicy(policyDto);
-		return responseDto;
-	}
-
-	public UserDto mapToUsers(User user) {
-		// get the value from user and set it into userDto Object
-		UserDto userDto = new UserDto();
-		userDto.setId(user.getId());
-		userDto.setFirstName(user.getFirstName());
-		userDto.setLastName(user.getLastName());
-		userDto.setEmail(user.getEmail());
-		return userDto;
-	}
 }
