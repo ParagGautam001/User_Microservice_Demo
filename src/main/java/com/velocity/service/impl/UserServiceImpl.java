@@ -13,9 +13,6 @@ import com.velocity.user.User;
 @Service
 public class UserServiceImpl implements UserService {
 
-	@Autowired
-	private UserRepository userRepository;
-
 	// inject webClient
 	@Autowired
 	private WebClient webClient;
