@@ -18,10 +18,9 @@ public class UserServiceImpl implements UserService {
 	private WebClient webClient;
 
 	@Override
-	public User savUser(User user) {
-		User user1 = userRepository.save(user);
-		return user1;
-	}
+    public String test() {
+        return "User Service Running 🚀";
+}
 
 	@Override
 	public ResponseDto getUser(int id) {
