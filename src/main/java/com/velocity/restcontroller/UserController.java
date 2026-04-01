@@ -13,20 +13,8 @@ import com.velocity.user.User;
 @RestController
 public class UserController {
 
-	@Autowired
-	private UserService userService;
-
-	// save
-	@PostMapping("/saveUser")
-	public User saveUser(@RequestBody User user) {
-		User user1 = userService.savUser(user);
-		return user1;
-	}
-
-	// get
-	@GetMapping("/getUser/{id}")
-	public ResponseDto getUserResponse(@PathVariable("id") Integer id) {
-		ResponseDto responseDto = userService.getUser(id);
-		return responseDto;
-	}
+    @GetMapping("/")
+    public String home() {
+        return "User Service Running 🚀";
+    }
 }
