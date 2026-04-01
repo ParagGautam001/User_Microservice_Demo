@@ -7,7 +7,7 @@ pipeline {
     }
 
     environment {
-        DOCKER_IMAGE = "paraggautam1/user-service:1.0"
+        DOCKER_IMAGE = "paraggautam1/user-service:2.0"
     }
 
     stages {
