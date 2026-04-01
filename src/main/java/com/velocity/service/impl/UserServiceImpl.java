@@ -13,10 +13,6 @@ import com.velocity.user.User;
 @Service
 public class UserServiceImpl implements UserService {
 
-	// inject webClient
-	@Autowired
-	private WebClient webClient;
-
 	@Override
     public String test() {
         return "User Service Running 🚀";
